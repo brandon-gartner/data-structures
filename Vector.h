@@ -4,13 +4,12 @@
 template <typename T>
 class Vector {
 private:
-    T _data[];
     int _size;
     int _capacity;
+    T* _data;
 
 public:
     Vector(int size = 10);
-    Vector(T data[]);
     ~Vector();
     int size() const;
     int capacity() const;

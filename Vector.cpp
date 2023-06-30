@@ -20,9 +20,6 @@ template <typename T>
 Vector<T>::Vector(int size): _data{new T[size]}, _size{size}, _capacity{0} {}
 
 template <typename T>
-Vector<T>::Vector(T data[]): _data{data}, _size{sizeof(data)}, _capacity{sizeof(data)} {}
-
-template <typename T>
 Vector<T>::~Vector<T>() {
     delete[] _data;
 }
@@ -45,8 +42,8 @@ T Vector<T>::Vector::at(int index) const {
 
 template <typename T>
 void Vector<T>::push_back(T value) {
-    if (sizeof(_data) == _size) {
-        T newData[_size * 2];
+    if (_capacity + 1 == _size) {
+        T* newData = new T[(_size * 2)];
         for (int i = 0; i < _size; i++) {
             newData[i] = _data[i];
         }
@@ -61,7 +58,7 @@ void Vector<T>::push_back(T value) {
 template <typename T>
 T Vector<T>::pop_back() {
     _capacity--;
-    return _data[_capacity + 1];
+    return _data[_capacity];
 }
 
 template <typename T>
